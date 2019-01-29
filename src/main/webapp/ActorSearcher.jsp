@@ -42,11 +42,10 @@
 						<c:out value="${peliculaActor.film.TITTLE}" />
 					</td>
 					</tr>
+					<tr></tr>
 					</c:forEach>
 			</tr>
 		</tbody>
 	</table>
-
-
 </body>
 </html> 
