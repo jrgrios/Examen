@@ -67,25 +67,23 @@
 		</servlet-class>
   </servlet>
   <servlet>
-	<servlet-name>characterSearcherServlet</servlet-name>
-	<servlet-class>es.salesianos.servlet.CharacterSearcherServlet
+    <servlet-name>characterSearcherServlet</servlet-name>
+    <servlet-class>es.salesianos.servlet.CharacterSearcherServlet
 		</servlet-class>
   </servlet>
   <servlet>
-		<servlet-name>ActorSeacherServlet</servlet-name>
-		<servlet-class>es.salesianos.servlet.ActorSeacherServlet
+    <servlet-name>ActorSeacherServlet</servlet-name>
+    <servlet-class>es.salesianos.servlet.ActorSeacherServlet
 		</servlet-class>
   </servlet>
-  
-    <servlet-mapping>
+  <servlet-mapping>
     <servlet-name>FilmActorServlet</servlet-name>
     <url-pattern>/FilmActor</url-pattern>
   </servlet-mapping>
-  
   <servlet-mapping>
     <servlet-name>AddActorServlet</servlet-name>
     <url-pattern>AddActor</url-pattern>
-  </servlet-mapping> 
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>FilmsList</servlet-name>
     <url-pattern>LoadFilmsList</url-pattern>
@@ -99,8 +97,8 @@
     <url-pattern>LoadActorsList</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-	<servlet-name>ActorSeacherServlet</servlet-name>
-	<url-pattern>/ActorSearcher</url-pattern>
+    <servlet-name>ActorSeacherServlet</servlet-name>
+    <url-pattern>/ActorSearcher</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>DeleteActorServlet</servlet-name>
@@ -122,7 +120,6 @@
     <servlet-name>AddDirectorServlet</servlet-name>
     <url-pattern>AddDirector</url-pattern>
   </servlet-mapping>
-
   <servlet-mapping>
     <servlet-name>RecoveryAddFilmServlet</servlet-name>
     <url-pattern>/recoveryFilm</url-pattern>
@@ -132,10 +129,9 @@
     <url-pattern>/fillPeliculaActor</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-	<servlet-name>characterSearcherServlet</servlet-name>
-	<url-pattern>/characterSearcher</url-pattern>
-	</servlet-mapping>
-
+    <servlet-name>characterSearcherServlet</servlet-name>
+    <url-pattern>/characterSearcher</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

@@ -21,10 +21,10 @@
 	<table border="1">
 		<thead>
 			<tr>
-				<td>Cod Actor</td>
-				<td>Actor Name</td>
-				<td>Year</td>
-				<td>Select</td>
+				<td>Codigo Actor</td>
+				<td>Nombre Actor</td>
+				<td>Año Nacimiento</td>
+				<td>Accion</td>
 			</tr>
 		</thead>
 		<tbody>

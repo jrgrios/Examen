@@ -9,24 +9,24 @@
 <body>
 	
 	<div>
-		<a href="addActor.jsp">Actors</a>
+		<a href="addActor.jsp">1 y 5-Actores y buscador de actor entre fechas</a>
 	</div>
 	
 	<div>
-		<a href="addPelicula.jsp">Films</a>
+		<a href="addPelicula.jsp">2-Peliculas</a>
 	</div>
 	
 	<div>
-		<a href="addDirector.jsp">Directors</a>
+		<a href="addDirector.jsp">3-Directores</a>
 	</div>
 	<div>
-		<a href="/FilmActor">Asociating films with Actors:</a>
+		<a href="/FilmActor">4-Asociar peliculas con actor:</a>
 	</div>
 	<div>
-		<a href="characterSearcher">Looking for Characters</a><br/>
+		<a href="characterSearcher">6-Buscar por nombre de personaje</a><br/>
 	</div>
 	<div>
-		<a href="/ActorSearcher.jsp">Searcher of Director by ActorHolaa</a><br/>
+		<a href="/ActorSearcher.jsp">7-Buscador de director por actor</a><br/>
 	</div>
 
 	

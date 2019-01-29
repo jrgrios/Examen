@@ -14,7 +14,7 @@
 </head>
 <body>
 <form action="LoadActorsList" method="post">
-		<input type="submit" value="Show List">
+		<input type="submit" value="Ver listado">
 </form>
 
 	<%
@@ -25,23 +25,23 @@
 	%>
 
 	<form action="AddActor" method="post">
-		<span>Name:</span><input type="text" name="NAME">
-		<span>Year Of Birthdate</span><input type="number" name="YEAROFBIRTHDAY">
+		<span>Nombre:</span><input type="text" name="NAME">
+		<span>Año de nacimiento</span><input type="number" name="YEAROFBIRTHDAY">
 		<input type="submit">
 	</form>
 	<form action="AddActor" method="post">
-		<span>From:</span>
+		<span>Desde:</span>
 		<input type="text" name="beginDate">
-		<span>To:</span>
+		<span>Hasta:</span>
 		<input type="text" name="endDate">
 		<input type="submit">
 	</form>
 	<table border="1">
 		<thead>
 			<tr>
-				<td>Name</td>
-				<td>Year</td>
-				<td>Erase</td>
+				<td>Nombre</td>
+				<td>Año</td>
+				<td>Accion</td>
 			</tr>
 		</thead>
 		<tbody>

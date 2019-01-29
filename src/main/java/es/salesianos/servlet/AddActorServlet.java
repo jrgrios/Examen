@@ -32,7 +32,6 @@ public class AddActorServlet extends HttpServlet {
 		} else {
 			Actor actor = assembler.assembleActorFromRequest(req);
 			service.addActor(actor);
-			listAllActors = service.selectAllActor();
 		}
 		req.setAttribute("listAllActors", listAllActors);
 		

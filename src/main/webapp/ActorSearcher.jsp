@@ -18,8 +18,8 @@
 	%>
 
 	<form action="/ActorSearcher" method="post">
-		<span>Looking By Actor: <input type="text" name="name"></span>
-		<br /> <input type="submit" value="Send">
+		<span>Buscar por actor: <input type="text" name="name"></span>
+		<br /> <input type="submit" value="Enviar">
 	</form>
 	<br />
 	<br />
@@ -27,8 +27,8 @@
 	<table border="1">
 		<thead>
 			<tr>
-				<td>Directors he worked with</td>
-				<td>Film Title</td>
+				<td>Directores con los que ha trabajado</td>
+				<td>Titutlo de la pelicula</td>
 			</tr>
 		</thead>
 		<tbody>

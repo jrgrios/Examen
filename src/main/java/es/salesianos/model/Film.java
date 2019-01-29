@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Film {
 	private Integer cod;
-	private String title;
+	private String tittle;
 	private Integer codDirector;
 	private Director director;
 	private List<FilmActors> peliculaActor;
@@ -38,11 +38,14 @@ public class Film {
 	public void setFilmActor(List<FilmActors> peliculaActor) {
 		this.peliculaActor = peliculaActor;
 	}
-	public String getTitle() {
-		return title;
+	public String getTittle() {
+		return tittle;
 	}
-	public void setTitle(String title) {
-		this.title = title;
+	public void setTittle(String tittle) {
+		this.tittle = tittle;
 	}
+
+	
+	
 	
 }

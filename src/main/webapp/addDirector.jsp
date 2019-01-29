@@ -14,7 +14,7 @@
 </head>
 <body>
 <form action="LoadDirectorsList" method="post">
-		<input type="submit" value="Show List">
+		<input type="submit" value="Ver listado de directores">
 </form>
 
 	<%
@@ -25,14 +25,14 @@
 	%>
 
 	<form action="AddDirector" method="post">
-		<span>Director's Name</span><input type="text" name="NAME">
+		<span>Nombre del director</span><input type="text" name="NAME">
 		<input type="submit" value="Send">
 	</form>
 	<table border="1">
 		<thead>
 			<tr>
-				<td>Director's Name</td>
-				<td>Erase</td>
+				<td>Nombre del director</td>
+				<td>Accion</td>
 			</tr>
 		</thead>
 		<tbody>

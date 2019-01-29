@@ -29,7 +29,7 @@ public class PeliculaServlet extends HttpServlet {
 		film.setCod(cod);
 		int codDirector = Integer.parseInt(codDirectorString);
 		film.setCodDirector(codDirector);
-		film.setTitle(title);
+		film.setTittle(title);
 		service.insert(film);
 		doAction(req, resp);
 	}

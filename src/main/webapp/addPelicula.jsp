@@ -14,7 +14,7 @@
 </head>
 <body>
 <form action="LoadFilmsList" method="post">
-		<input type="submit" value="Show List">
+		<input type="submit" value="Ver listado de peliculas">
 </form>
 
 	<%
@@ -25,16 +25,16 @@
 	%>
 
 	<form action="AddPelicula" method="post">
-		<span>Title:</span><input type="text" name="TITTLE">
-		<span>Director's Code:</span><input type="number" name="CODOWNER">
-		<input type="submit" value="Send">
+		<span>Titulo :</span><input type="text" name="TITTLE">
+		<span>Codigo del director:</span><input type="number" name="CODOWNER">
+		<input type="submit" value="Enviar">
 	</form>
 	<table border="1">
 		<thead>
 			<tr>
-				<td>Title</td>
-				<td>CodOwner</td>
-				<td>Erase</td>
+				<td>Titulo</td>
+				<td>Codigo Director</td>
+				<td>Accion</td>
 			</tr>
 		</thead>
 		<tbody>
