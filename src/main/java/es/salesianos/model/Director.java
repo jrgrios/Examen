@@ -18,13 +18,13 @@ public class Director {
 		this.name = name;
 	}
 	
-	private List<Film> peliculas;
+	private List<Film> films;
 
 	public List<Film> getPeliculas() {
-		return peliculas;
+		return films;
 	}
 
-	public void setPeliculas(List<Film> peliculas) {
-		this.peliculas = peliculas;
+	public void setPeliculas(List<Film> films) {
+		this.films = films;
 	}
 }
