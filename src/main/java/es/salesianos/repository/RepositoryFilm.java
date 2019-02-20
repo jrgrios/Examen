@@ -7,23 +7,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import es.salesianos.connection.ConnectionH2;
 import es.salesianos.connection.ConnectionManager;
 import es.salesianos.model.Film;
 
-
-
 public class RepositoryFilm {
-	
+
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test";
 	ConnectionManager manager = new ConnectionH2();
 
+	private static final Logger logger = LogManager.getLogger(RepositoryDirector.class);
 
 	private void close(PreparedStatement prepareStatement) {
 		try {
 			prepareStatement.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -32,30 +34,27 @@ public class RepositoryFilm {
 		try {
 			resultSet.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 	public void insertFilm(Film film) {
 		Connection conn = manager.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = conn.prepareStatement("INSERT INTO FILM (TITTLE,CODOWNER)" +
-					"VALUES (?, ?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO FILM (TITTLE,CODOWNER)" + "VALUES (?, ?)");
 			preparedStatement.setString(1, film.getTittle());
 			preparedStatement.setInt(2, film.getCodDirector());
 
-
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
-		}finally {
+		} finally {
 			close(preparedStatement);
 		}
-		
-		
+
 		manager.close(conn);
 	}
 
@@ -65,21 +64,21 @@ public class RepositoryFilm {
 		ResultSet resultSet = null;
 		PreparedStatement prepareStatement = null;
 		try {
-			
+
 			prepareStatement = conn.prepareStatement("SELECT * FROM FILM");
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				Film peliculaInDataBase = new Film();
-				
+
 				peliculaInDataBase.setCod(resultSet.getInt(1));
 				peliculaInDataBase.setTittle(resultSet.getString(2));
 				peliculaInDataBase.setCodDirector(resultSet.getInt(3));
 
 				listPeliculas.add(peliculaInDataBase);
 			}
-			
+
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
 		} finally {
 			close(resultSet);
@@ -99,7 +98,7 @@ public class RepositoryFilm {
 			prepareStatement.setInt(1, codFilm);
 			prepareStatement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
 		} finally {
 			close(prepareStatement);
@@ -107,6 +106,5 @@ public class RepositoryFilm {
 		manager.close(conn);
 		return ownerInDatabase;
 	}
-	
 
 }

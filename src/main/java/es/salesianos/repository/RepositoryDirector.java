@@ -7,23 +7,26 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import es.salesianos.connection.ConnectionH2;
 import es.salesianos.connection.ConnectionManager;
 import es.salesianos.model.Director;
 
-
-
 public class RepositoryDirector {
-	
+
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test";
 	ConnectionManager manager = new ConnectionH2();
 
+	private static final Logger logger = LogManager.getLogger(RepositoryDirector.class);
 
 	private void close(PreparedStatement prepareStatement) {
 		try {
 			prepareStatement.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
+
 			throw new RuntimeException(e);
 		}
 	}
@@ -32,33 +35,28 @@ public class RepositoryDirector {
 		try {
 			resultSet.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
 		}
 	}
 
-	
 	public void insertDirector(Director director) {
 		Connection conn = manager.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = conn.prepareStatement("INSERT INTO DIRECTOR (NAME)" +
-					"VALUES (?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO DIRECTOR (NAME)" + "VALUES (?)");
 			preparedStatement.setString(1, director.getName());
-
 
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
-		}finally {
+		} finally {
 			close(preparedStatement);
 		}
-		
-		
+
 		manager.close(conn);
 	}
-	
 
 	public List<Director> searchAllDirectors() {
 		List<Director> listDirectors = new ArrayList<Director>();
@@ -66,21 +64,21 @@ public class RepositoryDirector {
 		ResultSet resultSet = null;
 		PreparedStatement prepareStatement = null;
 		try {
-			
+
 			prepareStatement = conn.prepareStatement("SELECT * FROM DIRECTOR");
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				Director directorInDataBase = new Director();
-				
+
 				directorInDataBase.setCod(resultSet.getInt(1));
 				directorInDataBase.setName(resultSet.getString(2));
-			
-				
+
 				listDirectors.add(directorInDataBase);
 			}
-			
+
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
+
 			throw new RuntimeException(e);
 		} finally {
 			close(resultSet);
@@ -90,7 +88,7 @@ public class RepositoryDirector {
 
 		return listDirectors;
 	}
-	
+
 	public Director searchAndDeleteDirector(Integer codDirector) {
 		Director ownerInDatabase = null;
 		PreparedStatement prepareStatement = null;
@@ -100,7 +98,7 @@ public class RepositoryDirector {
 			prepareStatement.setInt(1, codDirector);
 			prepareStatement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
 		} finally {
 			close(prepareStatement);

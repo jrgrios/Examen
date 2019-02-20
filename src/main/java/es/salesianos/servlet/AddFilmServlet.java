@@ -15,19 +15,19 @@ import es.salesianos.service.FilmService;
 /**
  * Servlet implementation class addOwnerServlet
  */
-public class AddPeliculaServlet extends HttpServlet {
-private FilmService service = new FilmService();
+public class AddFilmServlet extends HttpServlet {
+	private FilmService service = new FilmService();
 	private ExamAssembler assembler = new ExamAssembler();
 
 	@Override
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Film film = assembler.assembleFilmFromRequest(req);
 		service.addFilm(film);
-		redirect(req,resp);
+		redirect(req, resp);
 	}
 
 	protected void redirect(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/addPelicula.jsp");
-		dispatcher.forward(req,resp);
+		dispatcher.forward(req, resp);
 	}
 }

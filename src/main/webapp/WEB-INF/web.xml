@@ -30,8 +30,8 @@
 		</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>AddPeliculaServlet</servlet-name>
-    <servlet-class>es.salesianos.servlet.AddPeliculaServlet
+    <servlet-name>AddFilmServlet</servlet-name>
+    <servlet-class>es.salesianos.servlet.AdFilmServlet
 		</servlet-class>
   </servlet>
   <servlet>
@@ -111,7 +111,7 @@
     <url-pattern>/deletePelicula</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>AddPeliculaServlet</servlet-name>
+    <servlet-name>AddFilmServlet</servlet-name>
     <url-pattern>AddPelicula</url-pattern>
   </servlet-mapping>
   <servlet-mapping>

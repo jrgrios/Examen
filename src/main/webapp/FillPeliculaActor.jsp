@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>ASIGNAR PELICULA AL ACTOR SELECCIONADO</title>
 </head>
 <body>
 <%

@@ -5,25 +5,27 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import es.salesianos.connection.ConnectionH2;
 import es.salesianos.connection.ConnectionManager;
 import es.salesianos.model.Actor;
 import es.salesianos.model.Film;
 import es.salesianos.model.FilmActors;
 
-
-
 public class RepositoryFilmActors {
-	
+
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test";
 	ConnectionManager manager = new ConnectionH2();
 
+	private static final Logger logger = LogManager.getLogger(RepositoryFilmActors.class);
 
 	private void close(PreparedStatement prepareStatement) {
 		try {
 			prepareStatement.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -32,12 +34,11 @@ public class RepositoryFilmActors {
 		try {
 			resultSet.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
 		}
 	}
 
-		
 	public void insertFilmActors(FilmActors filmActor) {
 		Connection conn = manager.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
@@ -50,7 +51,7 @@ public class RepositoryFilmActors {
 			preparedStatement.setInt(4, filmActor.getCodFilm());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
@@ -64,8 +65,7 @@ public class RepositoryFilmActors {
 		PreparedStatement preparedStatement = null;
 		FilmActors filmActor = null;
 		try {
-			preparedStatement = conn
-					.prepareStatement("SELECT * FROM FILMACTOR WHERE ROLE = (?)");
+			preparedStatement = conn.prepareStatement("SELECT * FROM FILMACTOR WHERE ROLE = (?)");
 			preparedStatement.setString(1, role);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
@@ -96,7 +96,7 @@ public class RepositoryFilmActors {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);

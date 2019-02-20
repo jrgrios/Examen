@@ -37,7 +37,8 @@ public class RepositoryActor {
 		try {
 			resultSet.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
+
 			throw new RuntimeException(e);
 		}
 	}
@@ -100,7 +101,8 @@ public class RepositoryActor {
 			prepareStatement.setInt(1, codActor);
 			prepareStatement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
+
 			throw new RuntimeException(e);
 		} finally {
 			close(prepareStatement);
@@ -117,9 +119,6 @@ public class RepositoryActor {
 			preparedStatement = conn.prepareStatement("SELECT * FROM ACTOR WHERE yearOfBirthDate BETWEEN (?) AND (?)");
 			preparedStatement.setInt(1, beginDate);
 			preparedStatement.setInt(2, endDate);
-			System.out.println("llego");
-			System.out.println(beginDate);
-			System.out.println(endDate);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Actor actor = new Actor();
@@ -130,7 +129,7 @@ public class RepositoryActor {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
@@ -155,7 +154,8 @@ public class RepositoryActor {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
+
 			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
@@ -216,7 +216,8 @@ public class RepositoryActor {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
+
 			throw new RuntimeException(e);
 		} finally {
 			close(preparedStatement);
