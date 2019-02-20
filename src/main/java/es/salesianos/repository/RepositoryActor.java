@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import es.salesianos.connection.ConnectionH2;
 import es.salesianos.connection.ConnectionManager;
 import es.salesianos.model.Actor;
@@ -14,19 +17,18 @@ import es.salesianos.model.Director;
 import es.salesianos.model.Film;
 import es.salesianos.model.FilmActors;
 
-
-
 public class RepositoryActor {
-	
+
 	private static final String jdbcUrl = "jdbc:h2:file:./src/main/resources/test";
 	ConnectionManager manager = new ConnectionH2();
 
+	private static final Logger logger = LogManager.getLogger(RepositoryActor.class);
 
 	private void close(PreparedStatement prepareStatement) {
 		try {
 			prepareStatement.close();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
 		}
 	}
@@ -44,20 +46,18 @@ public class RepositoryActor {
 		Connection conn = manager.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		try {
-			preparedStatement = conn.prepareStatement("INSERT INTO ACTOR (NAME,YEAROFBIRTHDATE)" +
-					"VALUES (?, ?)");
+			preparedStatement = conn.prepareStatement("INSERT INTO ACTOR (NAME,YEAROFBIRTHDATE)" + "VALUES (?, ?)");
 			preparedStatement.setString(1, actor.getName());
 			preparedStatement.setInt(2, actor.getYearofbirthday());
 
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
-		}finally {
+		} finally {
 			close(preparedStatement);
 		}
-		
-		
+
 		manager.close(conn);
 	}
 
@@ -71,17 +71,16 @@ public class RepositoryActor {
 			resultSet = prepareStatement.executeQuery();
 			while (resultSet.next()) {
 				Actor actorInDataBase = new Actor();
-				
+
 				actorInDataBase.setCod(resultSet.getInt(1));
 				actorInDataBase.setName(resultSet.getString(2));
 				actorInDataBase.setYearofbirthday(resultSet.getInt(3));
-			
-				
+
 				listOwners.add(actorInDataBase);
 			}
-			
+
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.info(e);
 			throw new RuntimeException(e);
 		} finally {
 			close(resultSet);
@@ -109,15 +108,13 @@ public class RepositoryActor {
 		manager.close(conn);
 		return ownerInDatabase;
 	}
-	
 
 	public List<Actor> filterByYearOfDateBetween(int beginDate, int endDate) {
 		Connection conn = manager.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		List<Actor> list = new ArrayList<Actor>();
 		try {
-			preparedStatement = conn
-					.prepareStatement("SELECT * FROM ACTOR WHERE yearOfBirthDate BETWEEN (?) AND (?)");
+			preparedStatement = conn.prepareStatement("SELECT * FROM ACTOR WHERE yearOfBirthDate BETWEEN (?) AND (?)");
 			preparedStatement.setInt(1, beginDate);
 			preparedStatement.setInt(2, endDate);
 			System.out.println("llego");
@@ -141,14 +138,13 @@ public class RepositoryActor {
 		}
 		return list;
 	}
-	
+
 	public List<Actor> selectAllActor() {
 		Connection conn = manager.open(jdbcUrl);
 		PreparedStatement preparedStatement = null;
 		List<Actor> list = new ArrayList<Actor>();
 		try {
-			preparedStatement = conn
-					.prepareStatement("SELECT * FROM ACTOR");
+			preparedStatement = conn.prepareStatement("SELECT * FROM ACTOR");
 			ResultSet resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				Actor actor = new Actor();
@@ -157,7 +153,7 @@ public class RepositoryActor {
 				actor.setYearofbirthday(resultSet.getInt(3));
 				list.add(actor);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -184,7 +180,8 @@ public class RepositoryActor {
 				actor = actorfromDataBase;
 			}
 
-			preparedStatement = conn.prepareStatement("SELECT * FROM FILMACTOR where codactor=" + actor.getCod());
+			preparedStatement = conn.prepareStatement(
+					"SELECT * FROM FILMACTOR INNER JOIN FILMACTOR ON FILMACTOR.CODACTOR = " + actor.getCod());
 			resultSet = preparedStatement.executeQuery();
 			while (resultSet.next()) {
 				FilmActors peliculaActorfromDataBase = new FilmActors();
@@ -195,8 +192,7 @@ public class RepositoryActor {
 			int index = 0;
 			for (FilmActors peliculaActor : actor.getFilmActor()) {
 
-				preparedStatement = conn
-						.prepareStatement("SELECT * FROM FILM where cod=" + peliculaActor.getCodFilm());
+				preparedStatement = conn.prepareStatement("SELECT * FROM FILM where cod=" + peliculaActor.getCodFilm());
 				resultSet = preparedStatement.executeQuery();
 				while (resultSet.next()) {
 					Film peliculafromDataBase = new Film();
